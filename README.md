@@ -1,6 +1,16 @@
 # apple-ads-python-demo
-Apple Ads Campaign Management API, OAuth, Report API examples
 
+Apple Ads 广告管理 API 的Python 代码示例，包括 OAuth 实施参考。Apple Ads Campaign Management API, OAuth, Report API examples
+
+## 重点注意
+
+安装如下 JWT 库
+
+```bash
+
+pip install PyJWT
+
+```
 
 ## 邀请 API 用户
 
@@ -11,10 +21,6 @@ Apple Ads Campaign Management API, OAuth, Report API examples
 ![Upload a Public Key](assets/upload-public-key.jpg?raw=true "Upload a Public Key")
 
 ## 代码
-
-```bash
-pip install PyJWT
-```
 
 ```python
 
