@@ -4,11 +4,12 @@ Apple Ads 广告管理 API 的Python 代码示例，包括 OAuth 实施参考。
 
 ## 重点注意
 
-安装如下 JWT 库
+安装三方依赖库
 
 ```bash
 
 pip install PyJWT
+pip install requests
 
 ```
 
@@ -24,12 +25,14 @@ pip install PyJWT
 
 ```python
 
-import jwt
 import datetime as dt
 
-client_id = 'SEARCHADS.27478e71-3bb0-4588-998c-182e2b405577'
-team_id = 'SEARCHADS.27478e71-3bb0-4588-998c-182e2b405577' 
-key_id = 'bacaebda-e219-41ee-a907-e2c25b24d1b2' 
+import jwt
+import requests
+
+client_id = 'SEARCHADS.27478e71-3bb0-1106-998c-ljh182405577'
+team_id = 'SEARCHADS.27478e71-3bb0-1106-998c-ljh182405577' 
+key_id = 'bacaebda-e219-1106-a907-ljh182405577' 
 audience = 'https://appleid.apple.com'
 alg = 'ES256'
 
@@ -52,7 +55,7 @@ payload['exp'] = expiration_timestamp
 payload['iss'] = team_id 
 
 # Path to signed private key.
-KEY_FILE = 'private-key.pem' 
+KEY_FILE = '/path/to/private-key.pem' 
 
 with open(KEY_FILE,'r') as key_file:
      key = ''.join(key_file.readlines())
@@ -68,6 +71,9 @@ with open('client_secret.txt', 'w') as output:
      output.write(client_secret.decode("utf-8"))
 
 
+print("clientSecret 建议保存，有效期可设置最长 180 天");
+print(client_secret.decode("utf-8"))
+
 url = "https://appleid.apple.com/auth/oauth2/token"
 headers = {
      'Host': 'appleid.apple.com',
@@ -75,6 +81,7 @@ headers = {
 }
 data = {
      'grant_type': 'client_credentials',
+     'agency': 'ljh',
      'scope': 'searchadsorg',
      'client_id': client_id,
      'client_secret': client_secret
@@ -83,6 +90,7 @@ resp = requests.post(url, headers=headers, data=data)
 result = resp.json()
 access_token = result.get('access_token')
 
+print("access_token 有效期1个小时")
 print(access_token)
 ```
 
